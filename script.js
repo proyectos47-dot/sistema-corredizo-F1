@@ -381,6 +381,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Mensaje de bienvenida
     setTimeout(() => {
-        mostrarToast('info', 'Bienvenido', 'Sistema CA-7025. Los cambios en selects actualizan los resultados.');
+        mostrarToast('info', 'Bienvenido', 'Sistema Doble Corredizo CA-7025. Optimizador para corte de puertas.');
     }, 1000);
 });
