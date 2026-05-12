@@ -1,7 +1,7 @@
 // ==============================================
 // CONFIGURACIÓN DEL BACKEND
 // ==============================================
-const API_BASE_URL = 'https://sistema-corrediza-ca7025.onrender.com';
+const API_BASE_URL = 'https://sistema-corredizo-b1.onrender.com';
 
 // Variable para recordar qué select fue el último en cambiar
 let ultimoSelectCambiado = null;
