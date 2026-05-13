@@ -358,6 +358,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     setTimeout(() => {
-        mostrarToast('info', 'Bienvenido', 'Sistema Doble Corredizo CA-7025. Optimizador para Corte de Puertas.');
+        mostrarToast('info', 'Bienvenido', 'Sistema Doble Corredizo CA-7025. Optimizador para Corte de Puertas - Version 01.');
     }, 1000);
 });
