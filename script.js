@@ -1,14 +1,8 @@
-// ==============================================
-// CONFIGURACIÓN DEL BACKEND
-// ==============================================
+
 const API_BASE_URL = 'https://sistema-corredizo-b1.onrender.com';
 
-// Variable para recordar qué select fue el último en cambiar
 let ultimoSelectCambiado = null;
 
-// ==============================================
-// SISTEMA DE NOTIFICACIONES TOAST
-// ==============================================
 function mostrarToast(tipo, titulo, mensaje) {
     const container = document.getElementById('toastContainer');
     const toastsExistentes = container.querySelectorAll('.toast');
@@ -45,9 +39,6 @@ function mostrarAyuda() {
     mostrarToast('info', 'Ayuda', 'Ingresa las medidas del vano (Ancho 600-2400 mm, Altura 1000-2200 mm)');
 }
 
-// ==============================================
-// FUNCIONES DE VALIDACIÓN
-// ==============================================
 function validarEntradaAv(mostrarToastError = false) {
     const input = document.getElementById('entradaAv');
     const value = parseInt(input.value);
@@ -122,9 +113,6 @@ function limitar4Digitos(input) {
     }
 }
 
-// ==============================================
-// FUNCIONES PRINCIPALES
-// ==============================================
 function obtenerValorTapacanto(texto) {
     return parseFloat(texto.replace(' mm', ''));
 }
@@ -132,7 +120,7 @@ function obtenerValorTapacanto(texto) {
 let calculando = false;
 
 function mostrarMensajePorSelect() {
-    // Verificar si ya hay un resultado previo
+   
     const apActual = document.getElementById('resultAp').textContent;
     if (apActual === '....') {
         return;
@@ -164,8 +152,7 @@ function mostrarMensajePorSelect() {
         default:
             break;
     }
-    
-    // Reset después de mostrar
+   
     ultimoSelectCambiado = null;
 }
 
@@ -224,12 +211,11 @@ async function calcularMedidas(mostrarToastVacio = false) {
         document.getElementById('resultL2').textContent = tapData.largoTapacanto;
         document.getElementById('resultA1').textContent = tapData.anchoTapacanto;
         document.getElementById('resultA2').textContent = tapData.anchoTapacanto;
-        
-        // Mostrar mensaje según el select que cambió (si aplica)
+      
         if (ultimoSelectCambiado !== null) {
             mostrarMensajePorSelect();
         } else if (mostrarToastVacio) {
-            // Solo mostrar "Cálculo exitoso" si fue por clic en el botón
+          
             mostrarToast('success', 'Cálculo exitoso', `AP: ${data.ap} mm, HP: ${data.hp} mm`);
         }
         
@@ -297,8 +283,7 @@ async function generarReporte() {
         });
         
         const html = await response.text();
-        
-        // Abrir ventana con título personalizado
+       
         const ventana = window.open('', '_blank');
         ventana.document.write(html);
         ventana.document.title = 'Reporte CA-7025 - Puertas Corredizas';
@@ -337,36 +322,29 @@ function nuevaCalculo() {
     ultimoSelectCambiado = null;
 }
 
-// ==============================================
-// INICIALIZACIÓN (EVENTOS)
-// ==============================================
 document.addEventListener('DOMContentLoaded', function() {
-    // Select: Material
+  
     document.getElementById('comboMaterial').addEventListener('change', function() {
         document.getElementById('materialSeleccionado').textContent = this.value;
         ultimoSelectCambiado = 'material';
         actualizarPorSelect();
     });
-    
-    // Select: Espesor
+      
     document.getElementById('comboEspesor').addEventListener('change', function() {
         ultimoSelectCambiado = 'espesor';
         actualizarPorSelect();
     });
     
-    // Select: Tapacanto Largo
     document.getElementById('comboTapacantoLargo').addEventListener('change', function() {
         ultimoSelectCambiado = 'tapacantoLargo';
         actualizarPorSelect();
     });
-    
-    // Select: Tapacanto Ancho
+   
     document.getElementById('comboTapacantoAncho').addEventListener('change', function() {
         ultimoSelectCambiado = 'tapacantoAncho';
         actualizarPorSelect();
     });
     
-    // Inputs: Ancho y Alto
     document.getElementById('entradaAv').addEventListener('input', function() {
         limitar4Digitos(this);
         validarEntradaAv(false);
@@ -379,7 +357,6 @@ document.addEventListener('DOMContentLoaded', function() {
         ultimoSelectCambiado = null;
     });
     
-    // Mensaje de bienvenida
     setTimeout(() => {
         mostrarToast('info', 'Bienvenido', 'Sistema Doble Corredizo CA-7025. Optimizador para corte de puertas.');
     }, 1000);
